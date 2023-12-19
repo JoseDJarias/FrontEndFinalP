@@ -1,1 +1,3 @@
 Create React VIte App link guide: https://carlosazaustre.es/react-vite
+
+command to install react router: npm i -D react-router-dom@latest
