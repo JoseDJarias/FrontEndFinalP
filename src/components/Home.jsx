@@ -1,6 +1,4 @@
 import React from "react";
-import 'dotenv/config';
-
 function Home() {
     return (
         <>
