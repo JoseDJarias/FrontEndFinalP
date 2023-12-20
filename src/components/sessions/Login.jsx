@@ -34,7 +34,7 @@ export const Login = () => {
           .login(formData)
           .then(data => {
             console.log(data.token)
-            localStorage.saveToken("token", data.token)
+            localStorage.saveToken(data.token)
           })
           .catch((err) => {
             alert('Something went wrong!',err);
