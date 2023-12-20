@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import AuthService from "../services/Auth.service";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
-
+import LocalStorageService from "../services/LocalStorage.service";
 
 export const Login = () => {
 
     const service = new AuthService;
     
+    const localStorage = new LocalStorageService;
   
     const [formData, setFormData] = useState({
         email: "",
@@ -21,7 +21,6 @@ export const Login = () => {
       
       const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log("NAME:",name);
         setFormData((prevData) => ({
           ...prevData,
           [name]: value
@@ -34,11 +33,13 @@ export const Login = () => {
         service
           .login(formData)
           .then(data => {
-            console.log(data.token);
+            console.log(data.token)
+            localStorage.saveToken("token", data.token)
           })
           .catch((err) => {
-            alert('Something went wrong!');
+            alert('Something went wrong!',err);
           });
+          
       }
     
       return (
