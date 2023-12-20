@@ -5,7 +5,6 @@ import './App.css'
 import AppRouter from './components/router/AppRouter'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
