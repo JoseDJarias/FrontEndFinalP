@@ -2,6 +2,7 @@ class LocalStorageService{
 
     saveToken(token){
         localStorage.setItem("token",token)
+        return 'Saved'
     }
 
     getToken(){
