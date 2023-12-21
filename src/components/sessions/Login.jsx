@@ -27,19 +27,15 @@ export const Login = () => {
         
         }));
       }
-      
-      const handleSubmit = (e) => {
-        // e.preventDefault();
-        service
-          .login(formData)
-          .then(data => {
-            console.log(data.token)
-            localStorage.saveToken(data.token)
-          })
-          .catch((err) => {
-            alert('Something went wrong!',err);
-          });
-          
+
+      const handleSubmit = async () => {
+        try {
+          const response = await service.login(formData);
+          localStorage.saveToken(response.token)
+        } 
+        catch (error) {
+          alert('Something went wrong!',error);
+        }        
       }
     
       return (
