@@ -6,9 +6,9 @@ import LocalStorageService from "../services/LocalStorage.service";
 
 export const Login = () => {
 
-    const service = new AuthService;
+    const service = new AuthService();
     
-    const localStorage = new LocalStorageService;
+    const localStorage = new LocalStorageService();
   
     const [formData, setFormData] = useState({
         email: "",
@@ -32,6 +32,8 @@ export const Login = () => {
         try {
           const response = await service.login(formData);
           localStorage.saveToken(response.token)
+          // console.log('Response',response);
+          // console.log('Token',response.token);
         } 
         catch (error) {
           alert('Something went wrong!',error);

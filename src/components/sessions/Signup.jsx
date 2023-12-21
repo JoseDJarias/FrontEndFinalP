@@ -5,9 +5,9 @@ import Form from 'react-bootstrap/Form';
 import LocalStorageService from "../services/LocalStorage.service";
 
 export const Signup= () => {
-    const service = new AuthService;
+    const service = new AuthService();
 
-    const localStorage = new LocalStorageService;
+    const localStorage = new LocalStorageService();
 
 
     const [formData, setFormData] = useState({
@@ -45,7 +45,7 @@ export const Signup= () => {
 
     return (
         <div className="">
-            <h1>SIgn In</h1>
+            <h1>SIgn Up</h1>
             <Form >
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Label>Email address</Form.Label>

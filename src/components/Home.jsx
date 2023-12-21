@@ -15,6 +15,7 @@ function Home() {
             async function fetchTodos() {
                 const response = await service.getTodos(token)
                 setData(response);
+                console.log('Response Home',response);
             }
             fetchTodos()
         } catch (error) {

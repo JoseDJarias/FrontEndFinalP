@@ -32,40 +32,45 @@ class AuthService extends ApplicationService {
         }
       });
       const responseData = await response.json();
+      // console.log('Response Data Auth Service',responseData);
       return responseData;
       
     } catch (error) {
       const message = console.log(`Ha ocurrido un error:  ${error}`);
       return message     }
   }
-
-
+  
+  
   async logout(token) {
-
     try {
-      
       if (!token) {
         throw new Error("Token not found");
       }
-  
-      const response = await fetch(`${this.apiHost()}/api/logout`, {
+      
+        const response = await fetch(`${this.apiHost()}/api/logout`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'token': token
         }
       });
+
+      if (!response.ok) {
+        throw new Error("Logout request failed");
+      }
+
       const responseData = await response.json();
+      return responseData
+ 
     } catch (error) {
-      const message = console.log(`Ha ocurrido un error:  ${error}`);
-      return message     }
+      console.error("An error occurred during logout:", error);
+      }
 
   };
 
   async getTodos(token){
 
     try {
-  
       const response = await fetch(`${this.apiHost()}/todos`, {
         method: 'GET',
         headers: {

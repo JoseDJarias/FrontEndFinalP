@@ -5,12 +5,12 @@ import LocalStorageService from "../services/LocalStorage.service";
 
 export const Logout = () => {
 
-    const service = new AuthService;
+    const service = new AuthService();
     
-    const localStorage = new LocalStorageService;
-
-    const token = localStorage.getToken;
-  
+    const localStorage = new LocalStorageService();
+ 
+    const token = localStorage.getToken();
+     
     const handleLogout = () => {
         try {
             service.logout(token)
