@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import ApplicationService from "./Application.service";
+import { UserContext, UserProvider } from "../context/UserContext";
+
 
 class AuthService extends ApplicationService {
   constructor() {
@@ -15,15 +18,19 @@ class AuthService extends ApplicationService {
         }
       });
       const responseData = await response.json();
+
+      this.setUserInfoSessionStorage(responseData.data);
+
       return responseData;
     } catch (error) {
       const message = console.log(`Ha ocurrido un error:  ${error}`);
-     return message 
+      return message
     }
   }
 
   async login(data) {
     try {
+
       const response = await fetch(`${this.apiHost()}/api/login`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -32,22 +39,33 @@ class AuthService extends ApplicationService {
         }
       });
       const responseData = await response.json();
-      // console.log('Response Data Auth Service',responseData);
-      return responseData;
-      
+
+      if (
+        responseData &&
+        responseData.data &&
+        responseData.data.user_info &&
+        responseData.data.token
+      ) {
+
+        this.setUserInfoSessionStorage(responseData.data);
+
+        return responseData.data.token;
+      }
+
     } catch (error) {
-      const message = console.log(`Ha ocurrido un error:  ${error}`);
-      return message     }
+      const message = console.error(`Ha ocurrido un error:  ${error}`);
+      return message
+    }
   }
-  
-  
+
+
   async logout(token) {
     try {
       if (!token) {
         throw new Error("Token not found");
       }
-      
-        const response = await fetch(`${this.apiHost()}/api/logout`, {
+
+      const response = await fetch(`${this.apiHost()}/api/logout`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -61,30 +79,15 @@ class AuthService extends ApplicationService {
 
       const responseData = await response.json();
       return responseData
- 
+
     } catch (error) {
       console.error("An error occurred during logout:", error);
-      }
+    }
 
   };
 
-  async getTodos(token){
-
-    try {
-      const response = await fetch(`${this.apiHost()}/todos`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'token': token
-        }
-      });
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      const message = console.log(`Ha ocurrido un error:  ${error}`);
-      return message     }
-
-  }
 }
+
+
 
 export default AuthService;

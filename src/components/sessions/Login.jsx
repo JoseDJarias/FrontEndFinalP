@@ -1,14 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import AuthService from "../services/Auth.service";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import LocalStorageService from "../services/LocalStorage.service";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
     const service = new AuthService();
     
     const localStorage = new LocalStorageService();
+
+    const navigate = useNavigate();
   
     const [formData, setFormData] = useState({
         email: "",
@@ -30,10 +33,12 @@ export const Login = () => {
 
       const handleSubmit = async () => {
         try {
+          
           const response = await service.login(formData);
-          localStorage.saveToken(response.token)
-          // console.log('Response',response);
-          // console.log('Token',response.token);
+          console.log(response);
+          localStorage.saveToken(response)
+          navigate('/')
+          
         } 
         catch (error) {
           alert('Something went wrong!',error);
