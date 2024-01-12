@@ -29,7 +29,7 @@ class ApplicationService {
             }
         };
 
-        // Convierto la madre a un json string
+        // Convierto  a un json string
         const jsonString = JSON.stringify(user_object);
 
         // Guardo el json string en sessionS
