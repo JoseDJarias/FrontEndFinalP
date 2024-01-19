@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import ApplicationService from "../services/Application.service";
+import ApplicationService from "../../services/Application.service";
 import { useLocation } from "react-router-dom";
 
 const appService = new ApplicationService();

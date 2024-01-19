@@ -31,3 +31,11 @@
     }
   }
   
+
+  .SwiperHomeSection{
+    background-color: #f0f0f0; /* Light gray background */
+  }
+
+  p {
+    color: #333; /* Dark gray text */
+  }

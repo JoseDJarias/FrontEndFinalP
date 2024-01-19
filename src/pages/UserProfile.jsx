@@ -71,7 +71,7 @@ export const UserProfile = () => {
     return (
         <div className="">
             <h1>Profile</h1>
-            {formData ? (
+            {formData && userInfo? (
                 <Form>
                     <Form.Group className="mb-3" controlId="user_name">
                         <Form.Label>User Name</Form.Label>

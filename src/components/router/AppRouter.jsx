@@ -5,7 +5,14 @@ import { Login } from "../sessions/Login";
 import { Logout } from "../sessions/Logout";
 import { Signup } from "../sessions/Signup";
 import { ApplicationNavbar } from "../shared/navbar";
-import { UserProfile } from "../pages/UserProfile";
+import { Product } from "../../pages/Product";
+import { ProductAdmin } from "../../pages/ProductAdmin";
+import { UserProfile } from "../../pages/UserProfile";
+import { CreateProduct } from "../productsAdmin/CreateProduct";
+import { CreateCategories } from "../productsAdmin/CreateCategories";
+import { ProductPictureForm } from "../productsAdmin/ProductPictureForm";
+import { ProductReviews } from "../productsAdmin/ProductReviews";
+
 
 
 
@@ -19,6 +26,14 @@ function AppRouter() {
                 <Route path='/logout' element={<Logout/>}></Route>
                 <Route path='/signup' element={<Signup/>}></Route>
                 <Route path='/profile' element={<UserProfile/>}></Route>
+                <Route path='/product' element={<Product/>}></Route>
+                <Route path='/product/admin' element={<ProductAdmin/>}></Route>
+                <Route path='/product/admin/create' element={<CreateProduct/>}></Route>
+                <Route path='/product/admin/category/create' element={<CreateCategories/>}></Route>
+                <Route path='/product/admin/create/picture' element={<ProductPictureForm/>}></Route>
+                <Route path='/product/admin/reviews' element={<ProductReviews/>}></Route>
+
+
 
             </Routes>
         </>

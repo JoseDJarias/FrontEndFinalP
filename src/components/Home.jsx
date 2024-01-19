@@ -1,6 +1,7 @@
 import React from "react";
 import defaultImage from '../assets/img/costa-rica-pura-vida-1.jpg'
 import '../assets/styles/home.css'
+import { SwiperHome } from "./SwiperHome";
 
 function Home() {
 
@@ -15,8 +16,8 @@ function Home() {
                 alt={'Pura Vida!'}
                 loading="lazy" 
             />
-            <section>
-                
+            <section className="SwiperHomeSection">
+                <SwiperHome></SwiperHome>
             </section>
 
         </>

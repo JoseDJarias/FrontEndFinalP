@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AuthService from "../services/Auth.service";
+import AuthService from "../../services/Auth.service";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import LocalStorageService from "../services/LocalStorage.service";
+import LocalStorageService from "../../services/LocalStorage.service";
 import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
@@ -66,7 +66,10 @@ export const Signup = () => {
         try {
             const response = await service.signup(formData);
             localStorage.saveToken(response)
-            navigate('/')
+            if (response) {
+              
+              navigate('/')
+            }
             console.log(response)
         }
         catch (error) {
