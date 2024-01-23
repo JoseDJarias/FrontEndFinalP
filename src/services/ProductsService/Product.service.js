@@ -1,4 +1,4 @@
-import ApplicationService from "./Application.service";
+import ApplicationService from "../Application.service";
 
 export default class ProductsService extends ApplicationService {
   constructor() {
@@ -35,9 +35,29 @@ export default class ProductsService extends ApplicationService {
     }
   }
 
+  async getAllCategories() {
+    try {
+      const response = await fetch(`${this.apiHost()}/api/users/products/categories_index`);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Failed to fetch categories. ${errorData.error || 'Unknown error'}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error(`Error fetching categories: ${error.message}`);
+    }
+  }
+
   async getProductsByCategory(categoryId) {
     try {
-      const response = await fetch(`${this.apiHost()}/api/users/products/products_by_category?category_id=${categoryId}`);
+      const response = await fetch(`${this.apiHost()}/api/users/products/products_by_category/${categoryId}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Failed to fetch products by category. ${errorData.error || 'Unknown error'}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {
@@ -92,6 +112,7 @@ export default class ProductsService extends ApplicationService {
       throw new Error(`Error updating product: ${error.message}`);
     }
   }
+  
   async toggleAvailableState(productId, state) {
     try {
       const response = await fetch(`${this.apiHost()}/api/admin/available_state/${productId}`, {
@@ -115,53 +136,60 @@ export default class ProductsService extends ApplicationService {
     }
   }
 
-
-  // Categories
-  async getCategories() {
-    const response = await fetch('http://localhost:3000/api/admin/categories');
-    if (!response.ok) {
-      throw new Error('Failed to fetch categories');
-    }
-    return response.json();
-  }
-
-  async createCategory(categoryData) {
+  async getAvailableProducts() {
     try {
-      const response = await fetch(`${this.apiHost()}/api/admin/categories`, {
-        method: 'POST',
+      const response = await fetch(`${this.apiHost()}/api/admin/available_products`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Include additional headers if needed (e.g., authentication token)
         },
-        body: JSON.stringify(categoryData),
       });
 
-      if (response.ok) {
-        const createdCategory = await response.json();
-        console.log('Category created successfully:', createdCategory);
-        return createdCategory;
-      } else {
-        const errorData = await response.json();
-        throw new Error(`Failed to create category: ${errorData.message}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch available products: ${response.statusText}`);
       }
+      const data = await response.json();
+
+      return data;
     } catch (error) {
-      console.error('Error creating category:', error.message);
+      console.error('Error fetching available products:', error.message);
+      throw new Error('Failed to fetch available products');
+    }
+  }
+
+  async filterByPriceRange(minPrice, maxPrice) {
+    try {
+      const response = await fetch(`${this.apiHost()}/api/users/products/filter_by_price_range`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+          min_price: minPrice,
+          max_price: maxPrice,
+        }),
+
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+      const filteredProducts = await response.json();
+
+      return filteredProducts;
+    } catch (error) {
+      console.error('Error en la solicitud de filtrado por rango de precio:', error.message);
       throw error;
     }
   }
-
-
-
-  // Product Picture
 
   async createProductPicture(data) {
     try {
       const response = await fetch(`${this.apiHost()}/api/admin/product_pictures/`, {
         method: 'POST',
         body: data,
-        // headers: {
-        //   'Content-Type': 'application/json'
-        // }
+  
       });
       const responseData = await response.json();
       console.log(responseData);

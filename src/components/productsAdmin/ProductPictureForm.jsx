@@ -26,16 +26,7 @@ export const ProductPictureForm = ({pictureGroups,setPictureGroups}) => {
     <div>
       {pictureGroups.map((group, index) => (
         <div key={index} style={{ marginTop: '20px' }}>
-          <Form.Group controlId={`product_id_${index}`}>
-            <Form.Label>Product ID</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter product ID"
-              name="product_id"
-              onChange={(e) => handleChange(e, index)}
-            />
-          </Form.Group>
-
+        
           <Form.Group controlId={`image_${index}`}>
             <Form.Label>Image</Form.Label>
             <Form.Control

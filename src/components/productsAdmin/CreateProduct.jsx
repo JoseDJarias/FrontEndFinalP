@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ProductService from "../../services/Product.service";
+import ProductService from "../../services/ProductsService/Product.service";
 import { useNavigate } from "react-router-dom";
 import { ProductPictureForm } from "./ProductPictureForm";
+import CategoryService from "../../services/ProductsService/Category.service";
 
 export const CreateProduct = () => {
   const productService = new ProductService();
+  const categoryService = new CategoryService();
 
   const [categories, setCategories] = useState([]);
   // pics state
@@ -30,7 +32,7 @@ export const CreateProduct = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const fetchedCategories = await productService.getCategories();
+        const fetchedCategories = await categoryService.getCategories();
         setCategories(fetchedCategories);
       } catch (error) {
         console.error('Error fetching categories:', error.message);
@@ -62,21 +64,25 @@ export const CreateProduct = () => {
       const response = await productService.createProduct(formData);
       debugger
       if (response.id) {
-        addPictures();
-
+        const products = await productService.getAllProducts();
+        const latestProduct = products[products.length - 1];
+  
+        addPictures(latestProduct.id);
+  
       }
       console.log("Product  created successfully");
-      navigate('/');
+      navigate('/product/admin');
     } catch (error) {
       console.error('Error creating product ', error.message);
     }
   };
 
-  const addPictures = () =>{
+
+  const addPictures = (productId) => {
     console.log("Submitting picture groups:", pictureGroups);
     pictureGroups.forEach(async (group) => {
       const formData = new FormData();
-      formData.append("product_id", group.product_id);
+      formData.append("product_id", productId);
       formData.append("image", group.image);
       formData.append("description", group.description);
       await productService.createProductPicture(formData);
@@ -170,7 +176,7 @@ export const CreateProduct = () => {
         <ProductPictureForm pictureGroups={pictureGroups} setPictureGroups={setPictureGroups}
         />
 
-   
+
         <Button variant="primary" type="button" onClick={handleSubmit}>
           Create Product
         </Button>

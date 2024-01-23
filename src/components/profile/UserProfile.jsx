@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ApplicationService from "../services/Application.service";
+import ApplicationService from "../../services/Application.service";
 import { useNavigate } from "react-router-dom";
-import ProfileService from "../services/Profile.service";
+import ProfileService from "../../services/Profile.service";
 
 export const UserProfile = () => {
     
@@ -71,7 +71,7 @@ export const UserProfile = () => {
     return (
         <div className="">
             <h1>Profile</h1>
-            {formData && userInfo? (
+            { formData? (
                 <Form>
                     <Form.Group className="mb-3" controlId="user_name">
                         <Form.Label>User Name</Form.Label>

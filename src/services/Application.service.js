@@ -38,12 +38,11 @@ class ApplicationService {
     }
 
     userInfoJsonStringToObject() {
-
         // Obtengo la data del user de sessionS
         const storedData = sessionStorage.getItem("userData");
         // Parseo de vuelta a un objeto el json string almacenado en sessionS
         const retrievedData = JSON.parse(storedData);
-
+        
         if (retrievedData) {
             return retrievedData
         } else {

@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import ProductsService from '../services/Product.service';
+import ProductsService from '../services/ProductsService/Product.service';
 import defaultImage from '../assets/img/defaultImage.png'
 
 export const SwiperHome = () => {
@@ -32,9 +32,12 @@ export const SwiperHome = () => {
   const handleImageLoad = (event) => {
     event.target.src = event.target.dataset.src;
   };
+  // AGREGAR DEFAULT IMAGE
 
   return (
-    // <>HOla</>
+    <>
+    
+   
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={0}
@@ -64,5 +67,6 @@ export const SwiperHome = () => {
         </SwiperSlide>
       ))}
     </Swiper>
+    </>
   );
 };

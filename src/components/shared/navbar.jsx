@@ -16,14 +16,11 @@ export const ApplicationNavbar = () => {
 
     useEffect(() =>{ 
         const userInfo = appService.userInfoJsonStringToObject() || {};
-        console.log('RENDER NAVBAR',userInfo);
         try {
             if (!appService.objectIsEmpty(userInfo)) {
                 const { user_info: { person } } = userInfo;
                 setCurrentUser(person.name);
-                console.log('Object NOt empty');
             } else {
-                console.log('Object empty');
                 setCurrentUser(null);
             }
     
@@ -55,7 +52,7 @@ export const ApplicationNavbar = () => {
                             <NavDropdown title="Check it out!" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="login">Login</NavDropdown.Item>
+                                <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     )}

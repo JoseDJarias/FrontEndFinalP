@@ -5,13 +5,18 @@ import { Login } from "../sessions/Login";
 import { Logout } from "../sessions/Logout";
 import { Signup } from "../sessions/Signup";
 import { ApplicationNavbar } from "../shared/navbar";
-import { Product } from "../../pages/Product";
-import { ProductAdmin } from "../../pages/ProductAdmin";
-import { UserProfile } from "../../pages/UserProfile";
+import { Product } from "../../components/products/Product";
+import { ProductAdmin } from "../productsAdmin";
+import { UserProfile } from "../../components/profile/UserProfile";
 import { CreateProduct } from "../productsAdmin/CreateProduct";
-import { CreateCategories } from "../productsAdmin/CreateCategories";
 import { ProductPictureForm } from "../productsAdmin/ProductPictureForm";
-import { ProductReviews } from "../productsAdmin/ProductReviews";
+import { ProductReviews } from "../productsAdmin/reviews/ProductReviews";
+import { PaymentIndex } from "../productsAdmin/payment";
+import { ShoppingCart } from "../products/shoppingcart";
+import { CategoryIndex } from "../productsAdmin/categories";
+import { CreateCategories } from "../productsAdmin/categories/CreateCategories";
+import { CreatePaymentMethod } from "../productsAdmin/payment/CreatePaymentMethod";
+
 
 
 
@@ -26,12 +31,17 @@ function AppRouter() {
                 <Route path='/logout' element={<Logout/>}></Route>
                 <Route path='/signup' element={<Signup/>}></Route>
                 <Route path='/profile' element={<UserProfile/>}></Route>
+                <Route path='/cart' element={<ShoppingCart/>}></Route>
                 <Route path='/product' element={<Product/>}></Route>
                 <Route path='/product/admin' element={<ProductAdmin/>}></Route>
                 <Route path='/product/admin/create' element={<CreateProduct/>}></Route>
+                <Route path='/product/admin/category/' element={<CategoryIndex/>}></Route>
                 <Route path='/product/admin/category/create' element={<CreateCategories/>}></Route>
                 <Route path='/product/admin/create/picture' element={<ProductPictureForm/>}></Route>
                 <Route path='/product/admin/reviews' element={<ProductReviews/>}></Route>
+                <Route path='/product/admin/payment/' element={<PaymentIndex/>}></Route>
+                <Route path='/product/admin/payment/create' element={<CreatePaymentMethod/>}></Route>
+
 
 
 

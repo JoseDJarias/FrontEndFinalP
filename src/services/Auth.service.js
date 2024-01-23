@@ -52,6 +52,8 @@ class AuthService extends ApplicationService {
         responseData.data.token
       ) {
 
+        console.log('RESPONSE',responseData.data);
+
         this.setUserInfoSessionStorage(responseData.data);
         return responseData.data.token;
       }

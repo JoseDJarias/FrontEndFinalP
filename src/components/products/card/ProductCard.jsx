@@ -1,20 +1,11 @@
 import './product-card.css'
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card } from 'react-bootstrap';
-import CustomModal from './CustomModal';
 
-export const ProductCard = ({ product,addToCart }) => {
-  const [showModal, setShowModal] = useState(false);
+import { AddToCartButton } from './AddToCartButton';
 
-  const handleAddToCart = () => {
-    console.log('Adding to cart:', product);
-    addToCart(product);
-    setShowModal(true);
-  };
+export const ProductCard = ({ product}) => {
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <Card style={{ width: '18rem' }}>
@@ -25,14 +16,8 @@ export const ProductCard = ({ product,addToCart }) => {
           Price: {product.unitary_price}
         </Card.Text>
         <Button variant="primary">Buy Now</Button>
-        <Button variant="success" onClick={handleAddToCart}>Add to Cart</Button>
-
-        <CustomModal
-          show={showModal}
-          handleClose={handleCloseModal}
-          title="Product Added to Cart"
-          body={<p>The product has been added to your cart.</p>}
-        />
+        <AddToCartButton product={product}/>
+   
       </Card.Body>
     </Card>
   );

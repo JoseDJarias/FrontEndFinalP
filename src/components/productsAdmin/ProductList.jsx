@@ -1,46 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import ProductService from "../../services/Product.service";
 import { FaCheck, FaTimes } from 'react-icons/fa';  // Import the FontAwesome icons
+import ProductsService from "../../services/ProductsService/Product.service";
 
 
 const ProductList = () => {
-  const productService = new ProductService();
+  const productService = new ProductsService();
   const [products, setProducts] = useState([]);
+  const [filter, setFilter] = useState('all'); // 'all' o 'available'
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetchedProducts = await productService.getAllProducts();
-        setProducts(fetchedProducts);
+
+        let productList;
+
+        if (filter === 'all') {
+          productList = await productService.getAllProducts();
+        } else if (filter === 'available') {
+          productList = await productService.getAvailableProducts();
+
+        }
+        setProducts(productList || []);
       } catch (error) {
         console.error('Error fetching products:', error.message);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [filter]);
 
   const handleEdit = (productId) => {
     // Implement your edit logic here
     console.log(`Editing product with id ${productId}`);
   };
-  
+
   const toggleAvailableState = async (productId, currentAvailableState) => {
     try {
       // Call the service method to toggle available state
       if (!currentAvailableState) {
-        await productService.toggleAvailableState(productId,true);
-      }else {
-        await productService.toggleAvailableState(productId,false);
+        await productService.toggleAvailableState(productId, true);
+      } else {
+        await productService.toggleAvailableState(productId, false);
       }
-      
+
       // Update the products state with the new data
       setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === productId ? { ...product, available: !currentAvailableState } : product
-      )
-    );  
+        prevProducts.map((product) =>
+          product.id === productId ? { ...product, available: !currentAvailableState } : product
+        )
+      );
 
     } catch (error) {
       console.error(`Error toggling available state: ${error.message}`);
@@ -50,6 +59,9 @@ const ProductList = () => {
 
   return (
     <div>
+      <Button onClick={() => setFilter(filter === 'all' ? 'available' : 'all')}>
+        {filter === 'all' ? 'Mostrar Disponibles' : 'Mostrar Todos'}
+      </Button>
       <h2>Product List</h2>
       <Table striped bordered hover>
         <thead>
