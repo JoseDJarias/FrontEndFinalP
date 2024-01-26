@@ -1,8 +1,9 @@
 import './product-card.css'
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import {  Card } from 'react-bootstrap';
 
 import { AddToCartButton } from './AddToCartButton';
+import { BuyNowButton } from '../buyNow/BuyNowButton';
 
 export const ProductCard = ({ product}) => {
 
@@ -15,7 +16,7 @@ export const ProductCard = ({ product}) => {
         <Card.Text>
           Price: {product.unitary_price}
         </Card.Text>
-        <Button variant="primary">Buy Now</Button>
+        <BuyNowButton product={product} />
         <AddToCartButton product={product}/>
    
       </Card.Body>

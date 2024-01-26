@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import ProductsService from "../../services/ProductsService/Product.service";
 import { ProductItems } from "./productItems/ProductItems";
-import { FilteredProductCategory  } from "./sidebar/category/FilteredProductCategory";
+import { FilteredProductCategory } from "./sidebar/category/FilteredProductCategory";
 import { FilteredProductPrice } from "./sidebar/price/FilteredProductPrice";
-import { ShoppingCart } from "./shoppingcart";
+import './product.css'
 
 export const Product = () => {
 
   const productService = new ProductsService();
 
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -30,9 +29,7 @@ export const Product = () => {
     fetchData();
   }, []);
 
-  // const addToCart = (product) => {
-  //   setCart([...cart, product]);
-  // };
+
 
   const handleCategoryChange = async (categoryId) => {
     try {
@@ -55,7 +52,6 @@ export const Product = () => {
         case 1:
           min_price = 0;
           max_price = 50;
-          console.log(min_price,max_price);
           break;
         case 2:
           min_price = 50;
@@ -71,11 +67,13 @@ export const Product = () => {
           break;
 
         default:
+          min_price = 0;
+          max_price = 50;
           break;
       }
-      console.log('AFTER SWITCH STAMENTS',min_price,max_price);
+      console.log('AFTER SWITCH STAMENTS', min_price, max_price);
 
-      
+
       const filteredProducts = await productService.filterByPriceRange(min_price, max_price);
       // // Filtra los productos según la categoría seleccionada, si la hay
       // const filteredByCategory = selectedCategory
@@ -92,16 +90,24 @@ export const Product = () => {
   };
 
   return (
-    <div>
-      <h1>Product List</h1>
-      <FilteredProductCategory categories={categories} onCategoryChange={handleCategoryChange} />
-      <FilteredProductPrice onRangeFilter={handlePriceRangeFilter} />
+    <>
+      <div className="product-section-header">
+        <h1>Product List</h1>
+      </div>
+      <div className="filter-section">
+        <FilteredProductCategory categories={categories} onCategoryChange={handleCategoryChange} />
+        <FilteredProductPrice onRangeFilter={handlePriceRangeFilter} />
+      </div>
 
-      {products.length > 0 ? (
-        <ProductItems products={products}  />
-      ) : (
-        <h3>Loading Products....</h3>
-      )}
-    </div>
+      <div className="product-section">
+        {products.length > 0 ? (
+          <ProductItems products={products} />
+        ) : (
+          <h3>No product in this filter....</h3>
+        )}
+
+      </div>
+
+    </>
   );
 };

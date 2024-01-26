@@ -16,6 +16,8 @@ import { ShoppingCart } from "../products/shoppingcart";
 import { CategoryIndex } from "../productsAdmin/categories";
 import { CreateCategories } from "../productsAdmin/categories/CreateCategories";
 import { CreatePaymentMethod } from "../productsAdmin/payment/CreatePaymentMethod";
+import { Checkout } from "../products/shoppingcart/Checkout";
+import { UserPurshases } from "../userPurshases/UserPurshases";
 
 
 
@@ -33,7 +35,10 @@ function AppRouter() {
                 <Route path='/profile' element={<UserProfile/>}></Route>
                 <Route path='/cart' element={<ShoppingCart/>}></Route>
                 <Route path='/product' element={<Product/>}></Route>
+                <Route path='/product/purshases' element={<UserPurshases/>}></Route>
                 <Route path='/product/admin' element={<ProductAdmin/>}></Route>
+                <Route path='/product/cart' element={<ShoppingCart/>}></Route>
+                <Route path='/product/cart/checkout' element={<Checkout/>}></Route>
                 <Route path='/product/admin/create' element={<CreateProduct/>}></Route>
                 <Route path='/product/admin/category/' element={<CategoryIndex/>}></Route>
                 <Route path='/product/admin/category/create' element={<CreateCategories/>}></Route>

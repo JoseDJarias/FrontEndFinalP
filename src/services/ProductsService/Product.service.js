@@ -65,6 +65,7 @@ export default class ProductsService extends ApplicationService {
     }
   }
 
+  // admin service
   async createProduct(productData) {
     try {
       // Make a POST request to the create product endpoint
@@ -92,7 +93,7 @@ export default class ProductsService extends ApplicationService {
       throw error;
     }
   }
-
+// admin service
   async updateProduct(productId, productData) {
     try {
       const response = await fetch(`${this.apiHost()}/api/admin/products/${productId}`, {
@@ -112,7 +113,8 @@ export default class ProductsService extends ApplicationService {
       throw new Error(`Error updating product: ${error.message}`);
     }
   }
-  
+
+  // admin service
   async toggleAvailableState(productId, state) {
     try {
       const response = await fetch(`${this.apiHost()}/api/admin/available_state/${productId}`, {
@@ -136,6 +138,7 @@ export default class ProductsService extends ApplicationService {
     }
   }
 
+  // admin service
   async getAvailableProducts() {
     try {
       const response = await fetch(`${this.apiHost()}/api/admin/available_products`, {
@@ -154,6 +157,35 @@ export default class ProductsService extends ApplicationService {
     } catch (error) {
       console.error('Error fetching available products:', error.message);
       throw new Error('Failed to fetch available products');
+    }
+  }
+
+  // admin service
+  async updateStock(state,productId,token){
+    console.log('state:',state, 'id',productId, 'tokken:',token);
+    if (!state && !productId) {
+      return `No accepting null data, state: ${state} product id: ${productId}`
+    }
+    try {
+      const response = await fetch(`${this.apiHost()}/api/admin/update_stock/${productId}`,{
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          token: token,
+        },
+        body: JSON.stringify({state: state}),
+
+       })
+
+       if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+
+      return  await response.json();
+      
+    } catch (error) {
+      console.error('Error actualizando el stock:', error.message);
+
     }
   }
 
@@ -183,6 +215,8 @@ export default class ProductsService extends ApplicationService {
       throw error;
     }
   }
+
+  //  Products Pics Service
 
   async createProductPicture(data) {
     try {

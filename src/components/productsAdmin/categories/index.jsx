@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, NavLink, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { NavLink } from "react-router-dom"
 import CategoryService from "../../../services/ProductsService/Category.service";
 import { FaEdit, FaCheck, FaTimes } from 'react-icons/fa';
 
@@ -70,7 +71,7 @@ export const CategoryIndex = () => {
 
     return ( 
         <div>
-            <NavLink to={`/product/admin/category/create`}> 
+            <NavLink to={'/product/admin/category/create'}> 
                 <Button variant="primary" >Create a Categorie!</Button>
             </NavLink>
             <Button onClick={() => setFilter(filter === 'all' ? 'available' : 'all')}>

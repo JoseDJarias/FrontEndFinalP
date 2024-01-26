@@ -13,6 +13,7 @@ class LocalStorageService{
         localStorage.removeItem("token");
 
     }
+
 };
 
 export default LocalStorageService;

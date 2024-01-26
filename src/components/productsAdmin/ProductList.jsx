@@ -2,33 +2,43 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { FaCheck, FaTimes } from 'react-icons/fa';  // Import the FontAwesome icons
 import ProductsService from "../../services/ProductsService/Product.service";
-
+import { IoAddSharp } from "react-icons/io5";
+import { IoIosRemove } from "react-icons/io";
+import LocalStorageService from "../../services/LocalStorage.service";
+import { useLocation } from "react-router-dom";
 
 const ProductList = () => {
   const productService = new ProductsService();
+  const localStorageService = new LocalStorageService();
+
+
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState('all'); // 'all' o 'available'
+  const useForceUpdate = useState()[1]; 
+  
+  const fetchProducts = async () => {
+    try {
+
+      let productList;
+
+      if (filter === 'all') {
+        productList = await productService.getAllProducts();
+      } else if (filter === 'available') {
+        productList = await productService.getAvailableProducts();
+
+      }
+      setProducts(productList || []);
+    } catch (error) {
+      console.error('Error fetching products:', error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-
-        let productList;
-
-        if (filter === 'all') {
-          productList = await productService.getAllProducts();
-        } else if (filter === 'available') {
-          productList = await productService.getAvailableProducts();
-
-        }
-        setProducts(productList || []);
-      } catch (error) {
-        console.error('Error fetching products:', error.message);
-      }
-    };
 
     fetchProducts();
   }, [filter]);
+
+
 
   const handleEdit = (productId) => {
     // Implement your edit logic here
@@ -56,11 +66,19 @@ const ProductList = () => {
     }
   };
 
+  const handleUpdateStock =  (state,id) =>{
+    const token =  localStorageService.getToken()
+   let response
+    state === true ? response = productService.updateStock(true,id,token) : response = productService.updateStock(false,id,token)
+    console.log(response);
+    // window.location.reload()
+  }
+
 
   return (
     <div>
       <Button onClick={() => setFilter(filter === 'all' ? 'available' : 'all')}>
-        {filter === 'all' ? 'Mostrar Disponibles' : 'Mostrar Todos'}
+        {filter === 'all' ? 'Show Availables' : 'Show All'}
       </Button>
       <h2>Product List</h2>
       <Table striped bordered hover>
@@ -85,7 +103,15 @@ const ProductList = () => {
               <td>{product.description}</td>
               <td>{product.unitary_price}</td>
               <td>{product.purchase_price}</td>
-              <td>{product.stock}</td>
+              <td>{product.stock}
+                <Button onClick={() => { handleUpdateStock(true, product.id) }}>
+                  <IoAddSharp />
+                </Button>
+                  <Button onClick={() => { handleUpdateStock(false, product.id) }}>
+                    <IoIosRemove />
+                  </Button>
+
+              </td>
               <td>{product.available.toString()}</td>
               <td>{product.category_id}</td>
               <td>

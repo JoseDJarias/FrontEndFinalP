@@ -4,7 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import ApplicationService from "../../services/Application.service";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { TiShoppingCart } from "react-icons/ti";
 
 const appService = new ApplicationService();
 
@@ -14,7 +15,9 @@ export const ApplicationNavbar = () => {
 
     const location = useLocation();
 
-    useEffect(() =>{ 
+    const navigate = useNavigate();
+
+    useEffect(() => {
         const userInfo = appService.userInfoJsonStringToObject() || {};
         try {
             if (!appService.objectIsEmpty(userInfo)) {
@@ -23,13 +26,22 @@ export const ApplicationNavbar = () => {
             } else {
                 setCurrentUser(null);
             }
-    
+
         } catch (error) {
             console.error('Error getting the data...');
-            
+
         }
-    },[location])
-    
+    }, [location])
+
+
+    const handleNavigateToProfile = () => {
+        // Do any logic before navigating if needed
+        // ...
+
+        // Navigate to the profile page with the prop
+        navigate('/profile', { checkProfileData: false } );
+    };
+
 
     return (
         <Navbar expand="lg" className="bg-dark" variant="dark" >
@@ -40,15 +52,20 @@ export const ApplicationNavbar = () => {
                     {currentUser ? (
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/product">Products</Nav.Link>
                             <NavDropdown title="Check it out!" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleNavigateToProfile}>Profile</NavDropdown.Item>
+                                <NavDropdown.Item href="/product/purshases">Purshases</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
                             </NavDropdown>
+                            <Nav.Link href="/product/cart"> <TiShoppingCart /> </Nav.Link>
+
                         </Nav>
                     ) : (
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/product">Products</Nav.Link>
                             <NavDropdown title="Check it out!" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
                                 <NavDropdown.Divider />

@@ -24,7 +24,7 @@ class ApplicationService {
                 id,
                 email,
                 person: {
-                    ...person // Spread the properties of the person object
+                    ...person
                 }
             }
         };
@@ -42,13 +42,45 @@ class ApplicationService {
         const storedData = sessionStorage.getItem("userData");
         // Parseo de vuelta a un objeto el json string almacenado en sessionS
         const retrievedData = JSON.parse(storedData);
-        
+
         if (retrievedData) {
             return retrievedData
         } else {
-            return null}
+            return null
+        }
 
+    }
 
+    addToCart(product) {
+        const cart = this.getCart() || [];
+
+        if (!cart.some(item => item.productId === product.productId)) {
+            cart.push({ ...product });
+            this.setCart(cart);
+            console.log('Product added', product);
+        }
+    }
+
+    setCart(cart) {
+        const jsonString = JSON.stringify(cart);
+        sessionStorage.setItem("cart", jsonString);
+    }
+
+    getCart() {
+        const jsonString = sessionStorage.getItem("cart");
+        return jsonString ? JSON.parse(jsonString) : null;
+    }
+
+    deleteFromCart(productId) {
+        const cart = this.getCart() || [];
+        const updatedCart = cart.filter(item => item.productId !== productId);
+        this.setCart(updatedCart);
+        console.log(`Product with ID ${productId} deleted from the cart`);
+    }
+
+    clearCart() {
+        sessionStorage.removeItem("cart");
+        console.log("Cart cleared");
     }
 }
 

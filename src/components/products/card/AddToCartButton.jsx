@@ -1,19 +1,26 @@
-import React, { useContext,useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import CustomModal from "./CustomModal";
-import { CartContext } from "../../context/CartProductsContext";
+import ApplicationService from "../../../services/Application.service";
 
 export const AddToCartButton = ({ product }) => {
-    const { setProducts } = useContext(CartContext);
     const [showModal, setShowModal] = useState(false);
+    const applicationService = new ApplicationService();
 
 
     const addToCart = () => {
-        setProducts('HOla');
         setShowModal(true);
-        console.log('Producto que agrego:',product);
+        const setProducts = {
+            name: product.name,
+            description: product.description,
+            productId: product.id,
+            unitaryPrice: product.unitary_price,
+            quantity : 1
+        }
+        applicationService.addToCart(setProducts)
 
     };
+
 
     const handleCloseModal = () => {
         setShowModal(false);
