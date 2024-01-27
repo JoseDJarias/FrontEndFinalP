@@ -198,10 +198,10 @@ export const Checkout = () => {
             ) : (
                 <div className="not-authorized-section">
                     <h3>Must need to be authorized, please sign up or login</h3>
-                    <NavLink to="/signup">
-                        <Button variant="success">Click Register</Button>
+                    <NavLink to="../../signup">
+                        <Button variant="success">Click to Register</Button>
                     </NavLink>
-                    <NavLink to="login">
+                    <NavLink to="../../login">
                         <Button variant="success">Click if you already have an account</Button>
                     </NavLink>
                 </div>

@@ -19,6 +19,7 @@ function Home() {
             <section className="SwiperHomeSection">
                 <SwiperHome></SwiperHome>
             </section>
+            
 
         </>
     );

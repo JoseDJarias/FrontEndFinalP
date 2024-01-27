@@ -77,6 +77,9 @@ export const CategoryIndex = () => {
             <Button onClick={() => setFilter(filter === 'all' ? 'available' : 'all')}>
                 {filter === 'all' ? 'Show Available' : 'Show All'}
             </Button>
+            <NavLink to={'/product/admin/'}> 
+                <Button variant="primary" >Go back to admin panel!</Button>
+            </NavLink>
             <h2>Category List</h2>
             {loading ? (
                 <p>Loading categories...</p>
@@ -98,11 +101,11 @@ export const CategoryIndex = () => {
                                     <td>{category.id}</td>
                                     <td>{category.name}</td>
                                     <td>
-                                        {/* <NavLink to={`/product/admin/category/edit`}> */}
+                                        <NavLink to='/coming/soon/admin'>
                                         <Button variant="primary">
                                             <FaEdit /> Edit
                                         </Button>
-                                        {/* </NavLink> */}
+                                        </NavLink>
                                         <Button
                                             variant={category.available ? "success" : "danger"}
                                             onClick={() => toggleAvailableState(category.id, category.available)}

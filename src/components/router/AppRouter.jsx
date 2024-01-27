@@ -18,6 +18,8 @@ import { CreateCategories } from "../productsAdmin/categories/CreateCategories";
 import { CreatePaymentMethod } from "../productsAdmin/payment/CreatePaymentMethod";
 import { Checkout } from "../products/shoppingcart/Checkout";
 import { UserPurshases } from "../userPurshases/UserPurshases";
+import { ComingSoonAdminComponent } from "../comingSoon/ComingSoonAdmin";
+import { ComingSoonUserComponent } from "../comingSoon/ComingSoonUser";
 
 
 
@@ -46,6 +48,8 @@ function AppRouter() {
                 <Route path='/product/admin/reviews' element={<ProductReviews/>}></Route>
                 <Route path='/product/admin/payment/' element={<PaymentIndex/>}></Route>
                 <Route path='/product/admin/payment/create' element={<CreatePaymentMethod/>}></Route>
+                <Route path='/coming/soon/admin' element={<ComingSoonAdminComponent/>}></Route>
+                <Route path='/coming/soon/user' element={<ComingSoonUserComponent/>}></Route>
 
 
 

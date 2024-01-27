@@ -5,6 +5,7 @@ import ProductService from "../../services/ProductsService/Product.service";
 import { useNavigate } from "react-router-dom";
 import { ProductPictureForm } from "./ProductPictureForm";
 import CategoryService from "../../services/ProductsService/Category.service";
+import { NavLink } from "react-router-dom";
 
 export const CreateProduct = () => {
   const productService = new ProductService();
@@ -66,9 +67,9 @@ export const CreateProduct = () => {
       if (response.id) {
         const products = await productService.getAllProducts();
         const latestProduct = products[products.length - 1];
-  
+
         addPictures(latestProduct.id);
-  
+
       }
       console.log("Product  created successfully");
       navigate('/product/admin');
@@ -91,6 +92,9 @@ export const CreateProduct = () => {
 
   return (
     <div className="">
+      <NavLink to='/product/admin/'>
+        <Button variant="primary" >Go back to admin panel!</Button>
+      </NavLink>
       <Form>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>

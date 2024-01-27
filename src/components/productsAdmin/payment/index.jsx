@@ -65,6 +65,9 @@ export const PaymentIndex = () => {
              <Button onClick={() => setFilter(filter === 'all' ? 'available' : 'all')}>
                 {filter === 'all' ? 'Show Available' : 'Show All'}
             </Button>
+            <NavLink to={'/product/admin/'}> 
+                <Button variant="primary" >Go back to admin panel!</Button>
+            </NavLink>
             <h2>Payment Method List</h2>
             {loading ? (
                 <p>Loading payment methods...</p>
@@ -86,9 +89,11 @@ export const PaymentIndex = () => {
                                     <td>{payment.id}</td>
                                     <td>{payment.method}</td>
                                     <td>
+                                        <NavLink to='/coming/soon/admin'>
                                         <Button variant="primary">
                                             <FaEdit /> Edit
                                         </Button>
+                                        </NavLink>
                                         <Button
                                             variant={payment.available ? "success" : "danger"}
                                             onClick={() => toggleAvailableState(payment.id, payment.available)}
