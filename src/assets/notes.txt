@@ -3,3 +3,22 @@ Create React VIte App link guide: https://carlosazaustre.es/react-vite
 command to install react router: npm i -D react-router-dom@latest
 
 command to install react bootstrap: npm install react-bootstrap bootstrap
+
+
+command to install swiper react: npm i swiper 
+
+comando to install react icons: npm install react-icons
+
+
+
+/api/products?page=1
+
+def index
+  current_page = params[:page]
+
+  @products = Product.all.page(current_page).size(10)
+end
+Jose Pablo Arce Cascante
+8:24 a.m.
+
+https://www.youtube.com/watch?v=Qoq6HZ8gdDE

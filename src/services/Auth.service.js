@@ -4,7 +4,7 @@ class AuthService extends ApplicationService {
   constructor() {
     super();
   }
-
+  
   async signup(data) {
     try {
       const response = await fetch(`${this.apiHost()}/api/signup`, {
@@ -15,15 +15,27 @@ class AuthService extends ApplicationService {
         }
       });
       const responseData = await response.json();
-      return responseData;
+      console.log('RESPONSE DATA SIGNUP',responseData.data.token);
+      if (
+        responseData &&
+        responseData.data &&
+        responseData.data.user_info &&
+        responseData.data.token
+        ) {
+          
+        this.setUserInfoSessionStorage(responseData.data);
+
+        return responseData.data.token;
+      }
     } catch (error) {
       const message = console.log(`Ha ocurrido un error:  ${error}`);
-     return message 
+      return message
     }
   }
 
   async login(data) {
     try {
+
       const response = await fetch(`${this.apiHost()}/api/login`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -32,22 +44,33 @@ class AuthService extends ApplicationService {
         }
       });
       const responseData = await response.json();
-      return responseData;
-      
+
+      if (
+        responseData &&
+        responseData.data &&
+        responseData.data.user_info &&
+        responseData.data.token
+      ) {
+
+        console.log('RESPONSE',responseData.data);
+
+        this.setUserInfoSessionStorage(responseData.data);
+        return responseData.data.token;
+      }
+
     } catch (error) {
-      const message = console.log(`Ha ocurrido un error:  ${error}`);
-      return message     }
+      const message = console.error(`Ha ocurrido un error:  ${error}`);
+      return message
+    }
   }
 
 
   async logout(token) {
-
     try {
-      
       if (!token) {
         throw new Error("Token not found");
       }
-  
+
       const response = await fetch(`${this.apiHost()}/api/logout`, {
         method: 'DELETE',
         headers: {
@@ -55,31 +78,22 @@ class AuthService extends ApplicationService {
           'token': token
         }
       });
+
+      if (!response.ok) {
+        throw new Error("Logout request failed");
+      }
+
       const responseData = await response.json();
+      return responseData
+
     } catch (error) {
-      const message = console.log(`Ha ocurrido un error:  ${error}`);
-      return message     }
+      console.error("An error occurred during logout:", error);
+    }
 
   };
 
-  async getTodos(token){
-
-    try {
-  
-      const response = await fetch(`${this.apiHost()}/todos`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'token': token
-        }
-      });
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      const message = console.log(`Ha ocurrido un error:  ${error}`);
-      return message     }
-
-  }
 }
+
+
 
 export default AuthService;

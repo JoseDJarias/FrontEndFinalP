@@ -1,0 +1,41 @@
+/* Estilos generales */
+.contenedor-imagen {
+    width: 100%;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Media queries para dispositivos específicos */
+  
+  /* Estilos para dispositivos móviles (ej. teléfonos) */
+  @media only screen and (max-width: 767px) {
+    .contenedor-imagen {
+      padding: 10px; /* Añade algún espacio alrededor de la imagen */
+    }
+  }
+  
+  /* Estilos para tabletas */
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .contenedor-imagen {
+      padding: 20px; /* Ajusta el espacio alrededor de la imagen para tabletas */
+    }
+  }
+  
+  /* Estilos para computadoras de escritorio y pantallas más grandes */
+  @media only screen and (min-width: 1024px) {
+    .contenedor-imagen {
+      padding: 30px; /* Ajusta el espacio alrededor de la imagen para pantallas más grandes */
+    }
+  }
+  
+
+  .SwiperHomeSection{
+    background-color: #f0f0f0; /* Light gray background */
+  }
+
+  p {
+    color: #333; /* Dark gray text */
+  }
