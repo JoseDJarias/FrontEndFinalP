@@ -1,0 +1,106 @@
+/* styles.css */
+
+.container {
+    padding: 20px;
+}
+
+.product-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.checkout-button {
+    background-color: #007bff;
+    color: #fff;
+    margin-bottom: 20px;
+    margin-left: 52px;
+}
+
+@media (max-width: 500px) {
+    .checkout-button {
+        margin-left: 52px; /* Ajustar el margen izquierdo para tamaños medianos */
+    }
+}
+
+@media (max-width: 767px) {
+    .checkout-button {
+        margin-left: 10px; /* Ajustar el margen izquierdo para tamaños medianos */
+    }
+}
+
+.total-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+    margin-left: 10px;
+}
+
+
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    display: flex;
+    flex-direction: column; /* Ajuste para que los elementos estén en columna */
+}
+
+.product-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px; /* Agregado para espaciado entre elementos */
+}
+
+.product-price {
+    font-size: 16px;
+    color: #007bff;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #666;
+}
+
+.product-quantity {
+    font-size: 14px;
+    color: #28a745;
+}
+
+.payment-method-select {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.voucher-upload {
+    margin-top: 20px;
+}
+
+.finish-payment-button {
+    background-color: #28a745;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.no-products,
+.no-payment-methods {
+    color: #d9534f;
+}
+
+.not-authorized-section {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.not-authorized-section h3 {
+    color: #d9534f;
+}
+
+.not-authorized-section Button {
+    margin-top: 10px;
+    background-color: #5bc0de;
+    color: #fff;
+}
+

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import AuthService from "../services/Auth.service";
+import AuthService from "../../services/Auth.service";
 import Button from 'react-bootstrap/Button';
-import LocalStorageService from "../services/LocalStorage.service";
+import LocalStorageService from "../../services/LocalStorage.service";
 import { useNavigate } from "react-router-dom";
 
 export const Logout = () => {

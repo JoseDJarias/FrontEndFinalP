@@ -1,0 +1,42 @@
+/* UserPurchases.css */
+
+.user-purchases-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .bill-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .bill-details {
+    margin-left: 20px;
+  }
+  
+  .product-bill-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .product-bill-container:nth-child(odd) {
+    background-color: #f9f9f9; /* Fondo gris claro para elementos impares */
+  }
+  
+  .product-bill-container:nth-child(even) {
+    background-color: #e0e0e0; /* Fondo gris más oscuro para elementos pares */
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .no-bills-message {
+    color: red;
+    font-weight: bold;
+  }
+  
