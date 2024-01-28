@@ -71,6 +71,7 @@ export const ApplicationNavbar = () => {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                             </NavDropdown>
+                            <Nav.Link href="/product/cart"> <TiShoppingCart /> </Nav.Link>
                         </Nav>
                     )}
                 </Navbar.Collapse>

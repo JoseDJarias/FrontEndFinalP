@@ -13,8 +13,8 @@ export const ShoppingCart = () => {
 
   useEffect(() => {
     const products = applicationService.getCart();
-    setCart(products);
-  }, [])
+    setCart(products || []);
+  },[])
 
 
   const handleDelete = (productId) => {
@@ -52,17 +52,16 @@ export const ShoppingCart = () => {
     setCart([])
   }
   return (
-    <div className={cart.length > 0 ? "shopping-cart-container" : "no-products-container"}>
-        
+    <div className={cart && cart.length > 0 ? "shopping-cart-container" : "no-products-container"}>
       <h2>Shopping Cart</h2>
       {cart && cart.length > 0 ? (
         <>
           <div className="buttons-container">
             <Button variant="danger" onClick={clearItems}> Clear Items</Button>
             <NavLink to="/product/cart/checkout">
-              <Button style={{marginLeft:'10px'}}>Proceed to Checkout!</Button>
+              <Button style={{ marginLeft: '10px' }}>Proceed to Checkout!</Button>
             </NavLink>
-         
+
           </div>
           {cart.map(item => (
             <div key={item.productId} className="cart-item">
